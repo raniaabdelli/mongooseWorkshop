@@ -88,5 +88,20 @@ router.delete('/Mary/',async(req,res)=>{
 })
 
 //Chain Search Query Helpers to Narrow Search Results
+// Find All People Who Love Burritos
 
+router.get('/food/',async(req,res)=>{
+    try{
+    var foodToSearch="burrito"
+person.find({favoriteFoods:foodToSearch})
+
+// Sort Results By Name In Ascending Order
+res.sort({name : "asc"}) 
+// Pick The First 2 Records
+ res.limit(2) 
+// Hide The Ages
+ res.select("-age") 
+// Execute The Query
+ res.exec((err, data) => { if(err) done(err); done(null, data); }) }
+catch(err){res.status(500).json({msg:err.message})}})
 module.exports=router
